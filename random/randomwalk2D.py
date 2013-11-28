@@ -4,7 +4,7 @@ import turtle # turtles are cute
 import random
 import math
 
-steps = 200
+steps = 500
 step_min_length = 1
 step_max_length = 5
 pi = 3.14159
@@ -74,7 +74,7 @@ def circular_gradient_direction(position_x, position_y):
         elif (position_x < 0 and position_y > 0):
             direction_towards_center = math.atan(position_x / position_y)
         direction_towards_center_deg = direction_towards_center * (180.0 / pi)
-        print(direction_towards_center_deg, position_x, position_y)
+        #print(direction_towards_center_deg, position_x, position_y)
     else:
         # Use random value for the odd chance that the division is at zero
         # also kicks off the first step
@@ -110,11 +110,20 @@ if __name__ == "__main__":
     #turtle.speed('fastest')
     turtle.speed('fastest')
     
-    #path = random_walk_right_angles(steps)
-    #path = random_walk_2D(steps)
-    path = random_walk_circular_gradient(steps)
+    path1 = random_walk_right_angles(steps)
+    path2 = random_walk_2D(steps)
+    path3 = random_walk_circular_gradient(steps)
     
-    for x, y in path:
+    for x, y in path1:
+        turtle.color("red")
+        turtle.goto(x*10, y*10)
+        
+    for x, y in path2:
+        turtle.color("green")
+        turtle.goto(x*10, y*10)
+        
+    for x, y in path3:
+        turtle.color("blue")
         turtle.goto(x*10, y*10)
         
     turtle.exitonclick()
