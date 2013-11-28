@@ -57,12 +57,12 @@ def random_walk_2D(steps):
 
 # Returns a random direction for a random walk considering
 # that the walk should be more biased towards the center of a circle
-# TODO: Fix bugs with wrong directione being calculated
 def circular_gradient_direction(position_x, position_y):
-    circle_radius = 50.0
+    circle_radius = 5.0
     distance_to_center = math.sqrt((position_x * position_x) + (position_y * position_y))
     
     # If at non-zero position
+    # Eh... I bet there's a good way to do "sectors" like these, but whatever.
     if (position_x != 0 and position_y != 0):
         direction_towards_center = 0
         if (position_x >= 0 and position_y >= 0):
@@ -95,10 +95,12 @@ def random_walk_circular_gradient(steps):
     for s in range(0, steps):
         # Get random angle for current position
         angle = circular_gradient_direction(current_x, current_y)
-        
-        # Step 2 units in the direction given by the gradient angle function
-        current_x += 5 * math.cos(angle)
-        current_y += 5 * math.sin(angle)
+
+        # Get random distance between min and max size
+        distance = random.randrange(step_min_length, step_max_length)
+        # And step in the direction biased by the circle gradient
+        current_x += distance * math.cos(angle)
+        current_y += distance * math.sin(angle)
         
         path.append((current_x, current_y))
         
