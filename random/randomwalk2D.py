@@ -2,8 +2,9 @@
 
 import turtle # turtles are cute
 import random
+import math
 
-steps = 100
+steps = 200
 step_min_length = 1
 step_max_length = 5
 
@@ -36,11 +37,28 @@ def random_walk_right_angles(steps):
     
     return path
 
+# Random walk in two dimensions without limiting the walk to 90 degree turns
+def random_walk_2D(steps):
+    path = []
+    current_x = 0
+    current_y = 0
+    
+    for s in range(0, steps):
+        # Get step direction, a random angle
+        angle = random.randrange(0, 360)
+        # Get step length
+        length = random.randrange(step_min_length, step_max_length)
+        current_x += length * math.cos(angle)
+        current_y += length * math.sin(angle)
+        path.append((current_x, current_y))
+    
+    return path
+
 if __name__ == "__main__":
-    turtle.speed('slowest')
-    path = random_walk_right_angles(steps)
-    print(path)
-    print(zip(*path))
+    turtle.speed('fastest')
+    
+    path = random_walk_2D(steps)
+    
     for x, y in path:
         turtle.goto(x*10, y*10)
         
